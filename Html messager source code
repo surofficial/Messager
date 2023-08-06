@@ -1,1 +1,128 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Messaging App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .loading-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f1f1f1;
+        }
+
+        .loading-text {
+            font-size: 24px;
+            font-weight: bold;
+            margin-right: 10px;
+        }
+
+        .loading-symbol {
+            font-size: 32px;
+            animation: spin 2s linear infinite;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .messaging-container {
+            display: none;
+            height: 100vh;
+            background-color: #fff;
+        }
+
+        .message {
+            padding: 10px;
+            border-bottom: 1px solid #ccc;
+        }
+
+        .input-container {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background-color: #f1f1f1;
+            padding: 10px;
+        }
+
+        .input-field {
+            width: 80%;
+            padding: 5px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .send-button {
+            width: 18%;
+            padding: 5px;
+            font-size: 16px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading-container">
+        <div class="loading-text">Loading Sur__(R) Messaging Software... Please wait.</div>
+        <div class="loading-symbol">&#8987;</div>
+    </div>
+
+    <div class="messaging-container" id="messagingApp">
+        <div class="message">Welcome to the messaging app!</div>
+        <div class="messages-container" id="messagesContainer"></div>
+        
+        <div class="input-container">
+            <input type="text" class="input-field" placeholder="Type your message..." id="messageInput">
+            <button class="send-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // Simulate loading time for demonstration purposes
+        setTimeout(() => {
+            const loadingContainer = document.querySelector('.loading-container');
+            const messagingApp = document.querySelector('#messagingApp');
+
+            loadingContainer.style.display = 'none';
+            messagingApp.style.display = 'block';
+        }, 3000);
+
+        // Function to send a new message
+        function sendMessage() {
+            const messageInput = document.getElementById("messageInput");
+            const message = messageInput.value.trim();
+
+            if (message !== "") {
+                const messagesContainer = document.getElementById("messagesContainer");
+                const newMessageDiv = document.createElement("div");
+                newMessageDiv.className = "message";
+                newMessageDiv.textContent = message;
+                messagesContainer.appendChild(newMessageDiv);
+
+                // Clear the input field after sending the message
+                messageInput.value = "";
+            }
+        }
+
+        // Enable sending message when pressing Enter key
+        document.getElementById("messageInput").addEventListener("keypress", function (event) {
+            if (event.key === "Enter") {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
 
